@@ -2,22 +2,24 @@ import pymysql
 
 from pathlib import Path
 
-from my_settings import SECRET_KEY, DATABASES, ALGORITHM
+from my_settings import SECRET_KEY, DATABASES, ALGORITHM, KAKAO_APPKEY
 
 # Install pymysql
 pymysql.install_as_MySQLdb()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = SECRET_KEY
-DATABASES = DATABASES
-ALGORITHM = ALGORITHM
+SECRET_KEY   = SECRET_KEY
+DATABASES    = DATABASES
+ALGORITHM    = ALGORITHM
+KAKAO_APPKEY = KAKAO_APPKEY
 
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
+    'django_extensions',
     'core',
     'flight',
     'reservation',
@@ -32,6 +34,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
