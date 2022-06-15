@@ -12,12 +12,11 @@ class KakaoLoginView(View):
         KAKAO_TOKEN_API = 'https://kauth.kakao.com/oauth/token'
         data = {
             'grant_type'  : 'authorization_code',
-            'redirect_uri': 'http://localhost:3000/kakaoLogin',
+            'redirect_uri': 'http://localhost:3000/kakao-login',
             'client_id'   : settings.KAKAO_APPKEY,
             'code'        : code
         }
-        access_token   = requests.post(KAKAO_TOKEN_API, data=data).json()['access_token'] #
-        
+        access_token   = requests.post(KAKAO_TOKEN_API, data=data).json()['access_token']
         KAKAO_INFO_API = 'https://kapi.kakao.com/v2/user/me'
         user_info      = requests.get(KAKAO_INFO_API, headers={'Authorization': f'Bearer {access_token}'}).json() 
         kakao_id       = user_info['id']
@@ -37,4 +36,5 @@ class KakaoLoginView(View):
         client_token = jwt.encode({'id':user.id}, settings.SECRET_KEY, settings.ALGORITHM)
         
         return JsonResponse({'message': message, 'token': client_token}, status=status)
+
 
