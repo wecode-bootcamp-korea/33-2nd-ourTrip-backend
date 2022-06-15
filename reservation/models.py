@@ -2,6 +2,7 @@ from django.db import models
 
 from core.models import TimeStampModel
 
+
 class FlightReservation(TimeStampModel):
     user   = models.ForeignKey('users.User', on_delete=models.CASCADE)
     flight = models.ForeignKey('flight.Flight', on_delete=models.CASCADE)
