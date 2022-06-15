@@ -17,8 +17,8 @@ class KakaoLoginView(View):
             'client_id'   : settings.KAKAO_APPKEY,
             'code'        : code
         }
-        access_token   = requests.post(KAKAO_TOKEN_API, data=data).json()
-        access_token   = access_token['access_token'] 
+        access_token   = requests.post(KAKAO_TOKEN_API, data=data).json()['access_token'] 
+
         KAKAO_INFO_API = 'https://kapi.kakao.com/v2/user/me'
         user_info      = requests.get(KAKAO_INFO_API, headers={'Authorization': f'Bearer {access_token}'}).json() 
         kakao_id       = user_info['id']
